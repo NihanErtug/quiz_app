@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/colors/app_colors.dart';
 import 'package:quiz_app/data/questions_data.dart';
+import 'package:quiz_app/models/question_model.dart';
 import 'package:quiz_app/result_page.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -14,25 +15,45 @@ class _QuizScreenState extends State<QuizScreen> {
   int currentIndex = 0;
   int _correctAnswer = 0, _wrongAnswer = 0;
   List<String> currentAnswers = [];
-  String lastAnswer = '';
+  List<String?> selectedAnswers = [];
 
   @override
   void initState() {
     super.initState();
+    selectedAnswers = List<String?>.filled(questions.length, null);
     setCurrentAnswers();
   }
 
   void setCurrentAnswers() {
-    currentAnswers = List<String>.from(questions[currentIndex].answers);
+    if (questions.isNotEmpty) {
+      currentAnswers = List<String>.from(questions[currentIndex].answers);
+    }
   }
 
   void checkAnswer(String userAnswer) {
+    if (questions.isEmpty) return;
+
     String correctAnswer = questions[currentIndex].correctAnswer;
+
+    // Eğer önceki cevap varsa D-Y sayısı güncellensin diye
+    String? previousAnswer = selectedAnswers[currentIndex];
+    if (previousAnswer != null) {
+      if (previousAnswer == correctAnswer) {
+        _correctAnswer--;
+      } else {
+        _wrongAnswer--;
+      }
+    }
+
     if (userAnswer == correctAnswer) {
       _correctAnswer++;
     } else {
       _wrongAnswer++;
     }
+
+    selectedAnswers[currentIndex] = userAnswer;
+
+    setState(() {});
 
     if (currentIndex == questions.length - 1) {
       Navigator.pushReplacement(
@@ -62,18 +83,9 @@ class _QuizScreenState extends State<QuizScreen> {
     setState(() {
       if (currentIndex > 0) {
         currentIndex--;
-        updateAnswer(lastAnswer);
         setCurrentAnswers();
       }
     });
-  }
-
-  void updateAnswer(String lastAnswer) {
-    if (lastAnswer == _correctAnswer) {
-      _correctAnswer--;
-    } else {
-      _wrongAnswer--;
-    }
   }
 
   @override
@@ -121,18 +133,23 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             Column(
               children: currentAnswers.map((answer) {
+                bool isSelected = selectedAnswers[currentIndex] == answer;
                 return Container(
                   padding: const EdgeInsets.all(0.5),
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () => checkAnswer(answer),
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: AppColors.buttonBackground()),
-                      child: Text(answer)),
+                    onPressed: () => checkAnswer(answer),
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: isSelected
+                            ? Colors.green
+                            : AppColors.buttonBackground()),
+                    child: Text(answer),
+                  ),
                 );
               }).toList(),
             ),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
