@@ -1,0 +1,40 @@
+name: quiz_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  icons_launcher: ^3.0.0
+
+icons_launcher:
+  image_path: 'assets/icon/icon.png'
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: false  
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/banner.png
+    - assets/icon/icon.png
+    - assets/wallpaper.png
+    - assets/start_banner.png
+    - assets/start_banner.gif
+    - assets/result_banner.png
+    - assets/result_wallpaper.png
+
+ 
