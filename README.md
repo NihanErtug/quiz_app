@@ -25,9 +25,9 @@ Bu proje, kullanıcıların sorulara cevap vererek doğru ve yanlış cevapları
 
 <img src="assets/screenshots/screenshot_1.png" width="25%" /> <img src="assets/screenshots/screenshot_2.png" width="25%" /> <img src="assets/screenshots/screenshot_3.png" width="25%" /> <img src="assets/screenshots/screenshot_4.png" width="25%" /> <img src="assets/screenshots/screenshot_5.png" width="25%" />
 <br>
-<hr>
 
-# Kullanım
+
+## Kullanım
 
 - Kullanıcı, bir soruya cevap verdikten sonra otomatik olarak bir sonraki soruya geçer. Tüm sorular cevaplandıktan sonra sonuç sayfasına yönlendirilir.
 - Bir önceki soruya dönüp cevabı değiştirme imkanı verir.
