@@ -100,6 +100,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       builder: (context) => QuizResult(
                         correctAnswer: _correctAnswer,
                         wrongAnswer: _wrongAnswer,
+                        selectedAnswers: selectedAnswers,
                       ),
                     ),
                   ),
@@ -176,7 +177,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.black,
                             backgroundColor: isSelected
-                                ? Colors.green
+                                ? const Color.fromARGB(255, 240, 112, 73)
                                 : AppColors.buttonBackground()),
                         child: Text(answer),
                       ),
