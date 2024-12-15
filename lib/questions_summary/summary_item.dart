@@ -11,7 +11,6 @@ class SummaryItem extends StatelessWidget {
     final isCorrectAnswer = data['user_answer'] == data['correct_answer'];
 
     return Padding(
-      //padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       padding: EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
